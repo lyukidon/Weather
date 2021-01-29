@@ -8,8 +8,14 @@
 </head>
 <body>
     <div>
-        <input type = 'text' id ='locationInput' placeholder="여기에 위치를 입력 하시오"/>
-        <button id = 'search'>검색하기</button><button id = 'currentPosition'>현재 위치</button>
+        <div id='inputBox'>
+            <input type = 'text' id ='locationInput' placeholder="여기에 위치를 입력 하시오"/>
+            <div id = 'buttonBox'>
+                <button id = 'search' class = 'searchBtn'>검색</button>
+                <button id = 'currentPosition' class='searchBtn'>현재 위치</button>
+            </div>
+        </div>
+        
         <h1 class = 'location'></h1>
         <p id ='country'></p>
         <div class="temperature">
