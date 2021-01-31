@@ -13,7 +13,8 @@ body{
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    background:grey;
+    background: linear-gradient(to bottom,black, blue);
+
 }
 .temperature{
     height: 30vh;
@@ -36,13 +37,12 @@ input::placeholder {
 }
 #locationInput{
     text-align: center;
-    background-color: white;
     color: black;
     border: none;
     width: 250px;
     height: 35px;
     border-radius: 10px;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 550;
 }
 .searchBtn, .currentPosition{

@@ -8,6 +8,7 @@
 </head>
 <body>
     <div>
+        <div id='currentTime'></div>
         <div id='inputBox'>
             <input type = 'text' id ='locationInput' placeholder="여기에 위치를 입력 하시오"/>
             <div id = 'buttonBox'>
@@ -25,8 +26,13 @@
             <h2 class="degree"></h2>
             <div class="temperature-description"></div>
         </div>
+
+        <div id = 'hourly'>
+
+        </div>
+        시간 별 날씨는 현재 위치 검색에서만 제공됩니다.
     </div>
     <script type="text/javascript" src="./script/app.js"></script>
-    <script type="text/javascript" src="./script/weatherAPI.js"></script>
+    <script type="text/javascript" src="./script/time.js"></script>
 </body>
 </html>

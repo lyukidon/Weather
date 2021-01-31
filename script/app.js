@@ -1,81 +1,64 @@
-// let long;
-// let lat;
-// if (navigator.geolocation){
-//     navigator.geolocation.getCurrentPosition(position=>{
-//         long = position.coords.longitude;
-//         lat = position.coords.latitude;
-//     })
-// }
-// function clickButton(e){
-//     const tempDescription = document.querySelector('.temperature-description');
-//     const tempDegree = document.querySelector('.degree');
-//     const location = document.querySelector('.location');
-//     const locationInput = document.querySelector('#locationInput').value;
-//     let api;
-//     console.log(e.target.id)
-//     if (e.target.id === 'search'){
-//         api = `https://api.openweathermap.org/data/2.5/weather?q=${locationInput}&appid=c0eb657b1620478cc82c72581f8128ba`;
-//     }else{
-//         api = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=c0eb657b1620478cc82c72581f8128ba`;
-//     }
-//     fetch(api)
-//         .then(response => {
-//             return response.json();
-//         })
-//         .then(data => {
-//             console.log(data);
-//             //위치
-//             location.innerHTML = data.name;
-//             country.innerHTML = data.sys.country;
-//             //아이콘!!
-//             let iconcode = data.weather[0].icon;
-//             let iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
-//             document.getElementById('wicon').src = iconurl;
-//             //온도
-//             tempDegree.innerHTML = Math.round(data.main.temp-273.15)+' °C'
-//         })
-// }
-// window.addEventListener('load', clickButton);
-
-// document.querySelector('#inputBox').addEventListener('click', clickButton);
-
-let long;
+const tempDescription = document.querySelector('.temperature-description');
+const tempDegree = document.querySelector('.degree');
+const Location = document.querySelector('.location');
+const Country = document.querySelector('#country');
+// 위도 경도
+let lon;
 let lat;
 if (navigator.geolocation){
     navigator.geolocation.getCurrentPosition(position=>{
-        long = position.coords.longitude;
+        lon = position.coords.longitude;
         lat = position.coords.latitude;
     })
 }
-function clickButton(e){
-    const tempDescription = document.querySelector('.temperature-description');
-    const tempDegree = document.querySelector('.degree');
-    const location = document.querySelector('.location');
-    const locationInput = document.querySelector('#locationInput').value;
-    let api;
-    console.log(e.target.id)
-    if (e.target.id === 'search'){
-        api = `https://api.openweathermap.org/data/2.5/weather?q=${locationInput}&appid=c0eb657b1620478cc82c72581f8128ba`;
-    }else{
-        api = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=c0eb657b1620478cc82c72581f8128ba`;
-    }
-    async function loadAPI(api){ 
-        const response = await fetch(api);
-        const data = await response.json()
-        //위치
-        location.innerHTML = data.name;
-        country.innerHTML = data.sys.country;
-        //아이콘!!
-        let iconcode = data.weather[0].icon;
-        let iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
-        document.getElementById('wicon').src = iconurl;
-        //온도
-        tempDegree.innerHTML = Math.round(data.main.temp-273.15)+' °C'
-    }
-    loadAPI(api)
+
+
+async function loadNow(apiNow){ 
+    const responseNow = await fetch(apiNow);
+    const dataNow = await responseNow.json();
+    //위치
+    Location.innerHTML = dataNow.name;
+    Country.innerHTML = dataNow.sys.country;
+    //아이콘
+    let iconcode = dataNow.weather[0].icon;
+    let iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+    document.getElementById('wicon').src = iconurl;
+    //온도
+    tempDegree.innerHTML = Math.round(dataNow.main.temp-273.15)+' °C';
 }
 
-window.addEventListener('load', clickButton);
+async function loadHourly(apiHourly){
+    const responseHourly = await fetch(apiHourly)
+    const dataHourly = await responseHourly.json();
+    console.log(dataHourly);
+    currentHour(dataHourly);
+}
+function currentHour(dataHourly){
+    const time = new Date();
+    const hour = time.getHours();
+    console.log(hour);
+    const Hourly = document.querySelector('#hourly');
+    for (let i=hour-1;i<=hour+7;i++){
+        const newDiv = document.createElement('div');
+        const hourlyTemp = document.createTextNode( Math.round(dataHourly.hourly[i].temp  -273.15) )
+        newDiv.appendChild(hourlyTemp);
+        Hourly.appendChild(newDiv);
+    }
+}
 
-document.querySelector('#inputBox').addEventListener('click', clickButton);
-
+function loadAPI(e){
+    const locationInput = document.querySelector('#locationInput').value;
+    let apiNow;
+    let apiHourly;
+    if (e.target.id === 'search'){
+        apiNow = `https://api.openweathermap.org/data/2.5/weather?q=${locationInput}&appid=c0eb657b1620478cc82c72581f8128ba`;
+    }else{
+        apiNow = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=c0eb657b1620478cc82c72581f8128ba`;
+        apiHourly = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely&appid=c0eb657b1620478cc82c72581f8128ba`;
+    }
+    loadNow(apiNow);
+    loadHourly(apiHourly)
+    apiHourly = ``;
+}
+window.addEventListener('load', loadAPI);
+document.querySelector('#inputBox').addEventListener('click', loadAPI)
