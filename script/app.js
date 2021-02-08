@@ -17,14 +17,17 @@ async function loadNow(apiNow){
     const responseNow = await fetch(apiNow);
     const dataNow = await responseNow.json();
     //위치
-    Location.innerHTML = dataNow.name;
-    Country.innerHTML = dataNow.sys.country;
-    //아이콘
-    let iconcode = dataNow.weather[0].icon;
-    let iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
-    document.getElementById('wicon').src = iconurl;
-    //온도
-    tempDegree.innerHTML = Math.round(dataNow.main.temp-273.15)+' °C';
+    if (dataNow.name != undefined){
+        
+        Location.innerHTML = dataNow.name;
+        Country.innerHTML = dataNow.sys.country;
+        //아이콘
+        let iconcode = dataNow.weather[0].icon;
+        let iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+        document.getElementById('wicon').src = iconurl;
+        //온도
+        tempDegree.innerHTML = Math.round(dataNow.main.temp-273.15)+' °C';
+    }
 }
 
 async function loadHourly(apiHourly){
@@ -39,9 +42,10 @@ function currentHour(dataHourly){
     console.log(hour);
     const Hourly = document.querySelector('#hourly');
     for (let i=hour-1;i<=hour+7;i++){
-        const newDiv = document.createElement('div');
-        const hourlyTemp = document.createTextNode( Math.round(dataHourly.hourly[i].temp  -273.15) )
-        newDiv.appendChild(hourlyTemp);
+        const temperature = document.createElement('div');
+        temperature.className = 'inlineBlock' 
+        const hourlyTemp = document.createTextNode( Math.round(dataHourly.hourly[i].temp  -273.15) + ' °C' )
+        temperature.appendChild(hourlyTemp);
         Hourly.appendChild(newDiv);
     }
 }
