@@ -1,6 +1,12 @@
 .inlineBlock{
     display: inline-block;
 }
+.hourlyTemperatureClass{
+    text-align: center;
+    margin-left: 10px;
+    font-weight: 500;
+    border: 2px solid black;
+}
 *{
     margin: 0;
     padding: 0;

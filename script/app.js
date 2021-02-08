@@ -12,13 +12,11 @@ if (navigator.geolocation){
     })
 }
 
-
 async function loadNow(apiNow){ 
     const responseNow = await fetch(apiNow);
     const dataNow = await responseNow.json();
     //위치
     if (dataNow.name != undefined){
-
         Location.innerHTML = dataNow.name;
         Country.innerHTML = dataNow.sys.country;
         //아이콘
@@ -38,16 +36,29 @@ async function loadHourly(apiHourly){
     console.log(dataHourly);
     currentHour(dataHourly);
 }
+
 function currentHour(dataHourly){
     const time = new Date();
     const hour = time.getHours();
     console.log(hour);
     const Hourly = document.querySelector('#hourly');
-    for (let i=hour-1;i<=hour+7;i++){
+    for (let i=hour;i<hour+9;i++){
+        const newDiv = document.createElement('div');
+        newDiv.className = 'inlineBlock hourlyTemperatureClass'
+        //시간
+        const hourDiv = document.createElement('div');
+        const hourText = document.createTextNode(i +'시');
+        hourDiv.appendChild(hourText);
+
+        //온도
         const temperature = document.createElement('div');
-        temperature.className = 'inlineBlock' 
-        const hourlyTemp = document.createTextNode( Math.round(dataHourly.hourly[i].temp  -273.15) + ' °C' )
+        const hourlyTemp = document.createTextNode( Math.round(dataHourly.hourly[i].temp - 273.15) + ' °C' )
+        console.log(dataHourly.hourly);
         temperature.appendChild(hourlyTemp);
+        
+        newDiv.appendChild(hourDiv);
+        newDiv.appendChild(temperature);
+
         Hourly.appendChild(newDiv);
     }
 }
