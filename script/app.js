@@ -18,7 +18,7 @@ async function loadNow(apiNow){
     const dataNow = await responseNow.json();
     //위치
     if (dataNow.name != undefined){
-        
+
         Location.innerHTML = dataNow.name;
         Country.innerHTML = dataNow.sys.country;
         //아이콘
@@ -27,6 +27,8 @@ async function loadNow(apiNow){
         document.getElementById('wicon').src = iconurl;
         //온도
         tempDegree.innerHTML = Math.round(dataNow.main.temp-273.15)+' °C';
+    }else{
+        alert('검색어를 잘못 입력하셨습니다.');
     }
 }
 
