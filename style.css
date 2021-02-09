@@ -1,34 +1,46 @@
 .inlineBlock{
     display: inline-block;
 }
+.textAlignCenter{
+    text-align: center;
+}
 .hourlyTemperatureClass{
     text-align: center;
-    margin-left: 10px;
-    font-weight: 500;
-    border: 2px solid black;
+    font-weight: 600;
+    padding:1px;
+    border:1px solid black;
+    border-radius: 10px;
+    margin-left: 4px;
 }
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 body{
     height: 100vh;
-    display: flex;
+    /* display: flex;
     justify-content: center;
     flex-direction: column;
-    align-items: center;
-    background: linear-gradient(to bottom,white, blue);
-
+    align-items: center; */
+    /* background: linear-gradient(to bottom,white, rgb(0, 81, 255)); */
+    background-color: rgb(34, 34, 34);
+}
+#total{
+    margin: 0 auto;
+    padding-top: 100px;
+    width: 335px;
+}
+#location{
+    font-weight: 750;
+    font-size: 35px;
+}
+#country{
+    margin-left: 5px;
+    vertical-align: bottom;
 }
 .temperature{
-    height: 30vh;
-    width: 50%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: column;
+
 }
 .degree-section{
     display: flex;
@@ -45,11 +57,10 @@ input::placeholder {
     text-align: center;
     color: black;
     border: none;
+    font-size: 16px;
     width: 250px;
     height: 35px;
     border-radius: 10px;
-    font-size: 20px;
-    font-weight: 550;
 }
 .searchBtn, .currentPosition{
     color: black;
@@ -57,14 +68,21 @@ input::placeholder {
 }
 .searchBtn{
     background-color: white;
-    width: 120px;
+    width: 35px;
     height: 35px;
     border: none;
     border-radius: 10px;
 }
-#buttonBox{
-    margin-top: 5px;
-}
 #currentPosition{
     margin-left: 3px;
+}
+.informationDiv{
+    margin-top: 12px;
+    padding: 7px;
+    background-color: rgb(87, 87, 87);
+    color: white;
+    border-radius: 10px;
+}
+#hourly{
+    ba
 }

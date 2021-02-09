@@ -1,6 +1,6 @@
 const tempDescription = document.querySelector('.temperature-description');
 const tempDegree = document.querySelector('.degree');
-const Location = document.querySelector('.location');
+const Location = document.querySelector('#location');
 const Country = document.querySelector('#country');
 // 위도 경도
 let lon;
@@ -42,7 +42,7 @@ function currentHour(dataHourly){
     const hour = time.getHours();
     console.log(hour);
     const Hourly = document.querySelector('#hourly');
-    for (let i=hour;i<hour+9;i++){
+    for (let i=hour;i<hour+7;i++){
         const newDiv = document.createElement('div');
         newDiv.className = 'inlineBlock hourlyTemperatureClass'
         //시간
@@ -53,7 +53,7 @@ function currentHour(dataHourly){
         //온도
         const temperature = document.createElement('div');
         const hourlyTemp = document.createTextNode( Math.round(dataHourly.hourly[i].temp - 273.15) + ' °C' )
-        console.log(dataHourly.hourly);
+
         temperature.appendChild(hourlyTemp);
         
         newDiv.appendChild(hourDiv);
