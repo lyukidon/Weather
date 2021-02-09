@@ -83,6 +83,12 @@ input::placeholder {
     color: white;
     border-radius: 10px;
 }
-#hourly{
-    ba
+#currentInformation{
+    margin-left: 160px;
+}
+#tempMax{
+    color: rgb(255, 95, 95);
+}
+#tempMin{
+    color: skyblue;
 }

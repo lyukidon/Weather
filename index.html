@@ -19,24 +19,32 @@
                 <i class="fa fa-search"></i>
             </button>
         </div>
-
-        <div id = 'information' class='informationDiv'>
+        <div id='locationDiv' class='informationDiv'>
             <div id='location' class='textAlignCenter inlineBlock'></div>
             <div id ='country' class='inlineBlock'></div>
+        </div>
+        <div id = 'information' class='informationDiv'>
             <div class="temperature">
-                <div id = 'icon'>
+                <div id = 'icon' class='inlineBlock'>
                     <img id="wicon" src="" alt="Weather icon">
+                    <div id='icon-description'></div>
                 </div>
-                <h2 class="degree"></h2>
+                <div id='currentInformation' class='inlineBlock'>
+                    <div id="degree"></div>
+                    <div id="feelLike"></div>
+                    <div id="tempMax"></div>
+                    <div id="tempMin"></div>
+                </div>
                 <div class="temperature-description"></div>
             </div>
         </div>
-
+        <div id="hourlyGraph" class="informationDiv"></div>
         <div class='informationDiv'>
             <div id='hourly'></div>
             시간 별 날씨는 위치 검색에서만 제공됩니다.
         </div>
     </div>
+    <script type="text/javascript" src="./script/declaration.js"></script>
     <script type="text/javascript" src="./script/app.js"></script>
 </body>
 </html>

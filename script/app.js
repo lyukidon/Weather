@@ -1,7 +1,3 @@
-const tempDescription = document.querySelector('.temperature-description');
-const tempDegree = document.querySelector('.degree');
-const Location = document.querySelector('#location');
-const Country = document.querySelector('#country');
 // 위도 경도
 let lon;
 let lat;
@@ -15,6 +11,7 @@ if (navigator.geolocation){
 async function loadNow(apiNow){ 
     const responseNow = await fetch(apiNow);
     const dataNow = await responseNow.json();
+    console.log(dataNow)
     //위치
     if (dataNow.name != undefined){
         Location.innerHTML = dataNow.name;
@@ -23,8 +20,13 @@ async function loadNow(apiNow){
         let iconcode = dataNow.weather[0].icon;
         let iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
         document.getElementById('wicon').src = iconurl;
+        iconDescription.innerHTML = dataNow.weather[0].description;
         //온도
-        tempDegree.innerHTML = Math.round(dataNow.main.temp-273.15)+' °C';
+        tempDegree.innerHTML = `현재: ${Math.round(dataNow.main.temp-273.15)} °C`;
+        feelLike.innerHTML = `체감: ${Math.round(dataNow.main.feels_like-273.15)} °C`;
+        tempMax.innerHTML = `최고: ${Math.round(dataNow.main.temp_max-273.15)} °C`;
+        tempMin.innerHTML = `최저: ${Math.round(dataNow.main.temp_min-273.15)} °C`;
+
     }else{
         alert('검색어를 잘못 입력하셨습니다.');
     }
@@ -40,8 +42,6 @@ async function loadHourly(apiHourly){
 function currentHour(dataHourly){
     const time = new Date();
     const hour = time.getHours();
-    console.log(hour);
-    const Hourly = document.querySelector('#hourly');
     for (let i=hour;i<hour+7;i++){
         const newDiv = document.createElement('div');
         newDiv.className = 'inlineBlock hourlyTemperatureClass'
@@ -79,3 +79,8 @@ function loadAPI(e){
 }
 window.addEventListener('load', loadAPI);
 document.querySelector('#inputBox').addEventListener('click', loadAPI)
+document.querySelector('#currentPosition').addEventListener('click', function(){
+    while(Hourly.hasChildNodes()){
+        Hourly.removeChild(Hourly.firstChild);
+    }
+})
