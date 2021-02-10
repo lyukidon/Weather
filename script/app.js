@@ -42,6 +42,10 @@ async function loadHourly(apiHourly){
 function currentHour(dataHourly){
     const time = new Date();
     const hour = time.getHours();
+    writeElement(hour,dataHourly);
+}
+
+function writeElement(hour,dataHourly){
     for (let i=hour;i<hour+7;i++){
         const newDiv = document.createElement('div');
         newDiv.className = 'inlineBlock hourlyTemperatureClass'
@@ -77,6 +81,7 @@ function loadAPI(e){
     loadHourly(apiHourly)
     apiHourly = ``;
 }
+
 window.addEventListener('load', loadAPI);
 document.querySelector('#inputBox').addEventListener('click', loadAPI)
 document.querySelector('#currentPosition').addEventListener('click', function(){
