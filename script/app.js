@@ -14,22 +14,28 @@ async function loadNow(apiNow){
     console.log(dataNow)
     //위치
     if (dataNow.name != undefined){
-        Location.innerHTML = dataNow.name;
-        Country.innerHTML = dataNow.sys.country;
-        //아이콘
-        let iconcode = dataNow.weather[0].icon;
-        let iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
-        document.getElementById('wicon').src = iconurl;
-        iconDescription.innerHTML = dataNow.weather[0].description;
-        //온도
-        tempDegree.innerHTML = `현재: ${Math.round(dataNow.main.temp-273.15)} °C`;
-        feelLike.innerHTML = `체감: ${Math.round(dataNow.main.feels_like-273.15)} °C`;
-        tempMax.innerHTML = `최고: ${Math.round(dataNow.main.temp_max-273.15)} °C`;
-        tempMin.innerHTML = `최저: ${Math.round(dataNow.main.temp_min-273.15)} °C`;
-
+        writeElement(dataNow);
     }else{
         alert('검색어를 잘못 입력하셨습니다.');
     }
+}
+
+function writeElement(dataNow){
+    Location.innerHTML = dataNow.name;
+    Country.innerHTML = dataNow.sys.country;
+    document.querySelector('#mapButton').addEventListener('click', function(){
+        window.location.href=`https://satellites.pro/${dataNow.name}_map`
+    })
+    //아이콘
+    let iconcode = dataNow.weather[0].icon;
+    let iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+    document.getElementById('wicon').src = iconurl;
+    iconDescription.innerHTML = dataNow.weather[0].description[0].toUpperCase() + dataNow.weather[0].description.slice(1,dataNow.weather[0].description.length);
+    //온도
+    tempDegree.innerHTML = `현재: ${Math.round(dataNow.main.temp-273.15)} °C`;
+    feelLike.innerHTML = `체감: ${Math.round(dataNow.main.feels_like-273.15)} °C`;
+    tempMax.innerHTML = `최고: ${Math.round(dataNow.main.temp_max-273.15)} °C`;
+    tempMin.innerHTML = `최저: ${Math.round(dataNow.main.temp_min-273.15)} °C`;
 }
 
 async function loadHourly(apiHourly){
@@ -42,10 +48,10 @@ async function loadHourly(apiHourly){
 function currentHour(dataHourly){
     const time = new Date();
     const hour = time.getHours();
-    writeElement(hour,dataHourly);
+    writeHourly(hour,dataHourly);
 }
 
-function writeElement(hour,dataHourly){
+function writeHourly(hour,dataHourly){
     for (let i=hour;i<hour+7;i++){
         const newDiv = document.createElement('div');
         newDiv.className = 'inlineBlock hourlyTemperatureClass'
@@ -84,7 +90,7 @@ function loadAPI(e){
 
 window.addEventListener('load', loadAPI);
 document.querySelector('#inputBox').addEventListener('click', loadAPI)
-document.querySelector('#currentPosition').addEventListener('click', function(){
+document.querySelector('#inputBox').addEventListener('click', function(){
     while(Hourly.hasChildNodes()){
         Hourly.removeChild(Hourly.firstChild);
     }

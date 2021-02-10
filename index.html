@@ -22,6 +22,7 @@
         <div id='locationDiv' class='informationDiv'>
             <div id='location' class='textAlignCenter inlineBlock'></div>
             <div id ='country' class='inlineBlock'></div>
+            <button id='mapButton'><i class="fa fa-map" style="font-size:32px"></i></button>
         </div>
         <div id = 'information' class='informationDiv'>
             <div class="temperature">
@@ -38,7 +39,9 @@
                 <div class="temperature-description"></div>
             </div>
         </div>
-        <div id="hourlyGraph" class="informationDiv"></div>
+        <div id="hourlyGraph" class="informationDiv">
+            <canvas id="myChart" height="100"></canvas>
+        </div>
         <div class='informationDiv'>
             <div id='hourly'></div>
             시간 별 날씨는 위치 검색에서만 제공됩니다.
