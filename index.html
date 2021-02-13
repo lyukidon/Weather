@@ -6,6 +6,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 </head>
 <body>
     <div id='total'>
@@ -40,7 +42,7 @@
             </div>
         </div>
         <div id="hourlyGraph" class="informationDiv">
-            <canvas id="myChart" height="100"></canvas>
+            <canvas id="temperatureGraph" height="100"></canvas>
         </div>
         <div class='informationDiv'>
             <div id='hourly'></div>
@@ -49,5 +51,6 @@
     </div>
     <script type="text/javascript" src="./script/declaration.js"></script>
     <script type="text/javascript" src="./script/app.js"></script>
+    <script type="text/javascript" src="./script/graph.js"></script>
 </body>
 </html>

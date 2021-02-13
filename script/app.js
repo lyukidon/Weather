@@ -45,10 +45,48 @@ async function loadHourly(apiHourly){
     currentHour(dataHourly);
 }
 
+
+
 function currentHour(dataHourly){
     const time = new Date();
     const hour = time.getHours();
+
     writeHourly(hour,dataHourly);
+    //그래프
+    let graphData = {
+        type: 'line',
+        data: {
+        labels: hourforGraph,
+        datasets: [{
+                label: '온도',
+                data: hourlyTempforGraph,
+                borderColor: "white",
+                backgroundColor: "white",
+                fill: false,
+                lineTension: 0
+                }]
+        },
+        options:{
+            legend:{
+                labels:{
+                    fontColor: 'white'
+                }
+            },
+            scales: {
+                xAxes:[{
+                    ticks: {
+                        fontColor: 'white'
+                    }
+                }],
+                yAxes:[{
+                    ticks: {
+                        fontColor: 'white'
+                    }
+                }]
+            }
+        }
+    }
+    createGraph(graphData);
 }
 
 function writeHourly(hour,dataHourly){
@@ -57,12 +95,21 @@ function writeHourly(hour,dataHourly){
         newDiv.className = 'inlineBlock hourlyTemperatureClass'
         //시간
         const hourDiv = document.createElement('div');
-        const hourText = document.createTextNode(i +'시');
+        hourDiv.className = 'hourDiv'
+        let hourText;
+        if (i>=24){
+            hourText = document.createTextNode(i-24 +'시');
+            hourforGraph.push(i-24);
+        }else{
+            hourText = document.createTextNode(i +'시');
+            hourforGraph.push(i);
+        }
         hourDiv.appendChild(hourText);
-
         //온도
         const temperature = document.createElement('div');
-        const hourlyTemp = document.createTextNode( Math.round(dataHourly.hourly[i].temp - 273.15) + ' °C' )
+        temperature.className = 'hourlyTemperatureDiv'
+        const hourlyTemp = document.createTextNode( Math.round(dataHourly.hourly[i].temp - 273.15) + '°C' )
+        hourlyTempforGraph.push( Math.round(dataHourly.hourly[i].temp - 273.15) );
 
         temperature.appendChild(hourlyTemp);
         
@@ -71,6 +118,11 @@ function writeHourly(hour,dataHourly){
 
         Hourly.appendChild(newDiv);
     }
+}
+
+function createGraph(graphData){
+
+    new Chart(document.querySelector('#temperatureGraph'), graphData);
 }
 
 function loadAPI(e){
@@ -89,9 +141,11 @@ function loadAPI(e){
 }
 
 window.addEventListener('load', loadAPI);
-document.querySelector('#inputBox').addEventListener('click', loadAPI)
 document.querySelector('#inputBox').addEventListener('click', function(){
     while(Hourly.hasChildNodes()){
         Hourly.removeChild(Hourly.firstChild);
     }
+    hourlyTempforGraph = [];
+    hourforGraph = [];
 })
+document.querySelector('#inputBox').addEventListener('click', loadAPI)
