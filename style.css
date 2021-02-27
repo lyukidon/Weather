@@ -5,6 +5,7 @@
     text-align: center;
 }
 .hourlyTemperatureClass{
+    width:41px;
     text-align: center;
     font-weight: 600;
     padding:1px;
@@ -89,6 +90,9 @@ input::placeholder {
     background-color: rgb(87, 87, 87);
     color: white;
     border-radius: 10px;
+}
+#cityCountry{
+    width: 240px;
 }
 #icon{
     width: 50%;

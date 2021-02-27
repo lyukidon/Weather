@@ -1,6 +1,11 @@
         //////////////////
-        //// 날씨 정보 ////
+        //// 위치 정보 ////
         //////////////////
+let lon;
+let lat;
+        //////////////////
+        //// 날씨 정보 ////
+        /////////////////
 const tempDescription = document.querySelector('.temperature-description');
 const tempDegree = document.querySelector('#degree');
 const Location = document.querySelector('#location');

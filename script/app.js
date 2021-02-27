@@ -1,11 +1,11 @@
 // 위도 경도
-let lon;
-let lat;
-if (navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(position=>{
-        lon = position.coords.longitude;
-        lat = position.coords.latitude;
-    })
+function findLocation(){
+    if (navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(position=>{
+            lon = position.coords.longitude;
+            lat = position.coords.latitude;
+        })
+    }
 }
 
 async function loadNow(apiNow){ 
@@ -121,7 +121,6 @@ function writeHourly(hour,dataHourly){
 }
 
 function createGraph(graphData){
-
     new Chart(document.querySelector('#temperatureGraph'), graphData);
 }
 
@@ -129,9 +128,11 @@ function loadAPI(e){
     const locationInput = document.querySelector('#locationInput').value;
     let apiNow;
     let apiHourly;
+    console.log(e.target)
     if (e.target.id === 'search'){
         apiNow = `https://api.openweathermap.org/data/2.5/weather?q=${locationInput}&appid=c0eb657b1620478cc82c72581f8128ba`;
-    }else{
+    }else if(e.target.id==='currentPosition' || e.target.className === 'fa fa-map'){
+        findLocation();
         apiNow = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=c0eb657b1620478cc82c72581f8128ba`;
         apiHourly = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely&appid=c0eb657b1620478cc82c72581f8128ba`;
     }
@@ -139,13 +140,17 @@ function loadAPI(e){
     loadHourly(apiHourly)
     apiHourly = ``;
 }
+function searchLocationAPI(){
+
+}
 
 window.addEventListener('load', loadAPI);
-document.querySelector('#inputBox').addEventListener('click', function(){
+document.querySelector('#clickDiv').addEventListener('click', function(){
     while(Hourly.hasChildNodes()){
         Hourly.removeChild(Hourly.firstChild);
     }
     hourlyTempforGraph = [];
     hourforGraph = [];
+    // writeHourly();
 })
-document.querySelector('#inputBox').addEventListener('click', loadAPI)
+document.querySelector('#clickDiv').addEventListener('click', loadAPI)

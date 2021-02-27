@@ -13,17 +13,23 @@
     <div id='total'>
 
         <div id='inputBox'>
-            <input type = 'text' id ='locationInput' placeholder="여기에 위치를 입력 하시오"/>
-            <button id = 'currentPosition' class='searchBtn'>
-                <i class="fa fa-map-marker"></i>
-            </button>
-            <button id = 'search' class = 'searchBtn'>
-                <i class="fa fa-search"></i>
-            </button>
+            <div class="inlineBlock">
+                <input type = 'text' id ='locationInput' placeholder="여기에 위치를 입력 하시오"/>
+            </div>
+            <div id='clickDiv' class='inlineBlock'>
+                <button id = 'currentPosition' class='searchBtn'>
+                    <i class="fa fa-map-marker"></i>
+                </button>
+                <button id = 'search' class = 'searchBtn'>
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
         </div>
         <div id='locationDiv' class='informationDiv'>
-            <div id='location' class='textAlignCenter inlineBlock'></div>
-            <div id ='country' class='inlineBlock'></div>
+            <div id='cityCountry' class='inlineBlock'>
+                <div id='location' class='textAlignCenter inlineBlock'></div>
+                <div id ='country' class='inlineBlock'></div>
+            </div>
             <button id='mapButton'><i class="fa fa-map" style="font-size:32px"></i></button>
         </div>
         <div id = 'information' class='informationDiv'>
