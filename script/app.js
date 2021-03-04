@@ -16,7 +16,7 @@ async function loadNow(apiNow){
     if (dataNow.name != undefined){
         writeElement(dataNow);
     }else{
-        alert('검색어를 잘못 입력하셨습니다.');
+        loadWindow();
     }
 }
 
@@ -128,7 +128,6 @@ function loadAPI(e){
     const locationInput = document.querySelector('#locationInput').value;
     let apiNow;
     let apiHourly;
-    console.log(e.target)
     if (e.target.id === 'search'){
         apiNow = `https://api.openweathermap.org/data/2.5/weather?q=${locationInput}&appid=c0eb657b1620478cc82c72581f8128ba`;
     }else if(e.target.id==='currentPosition' || e.target.className === 'fa fa-map'){
@@ -140,17 +139,24 @@ function loadAPI(e){
     loadHourly(apiHourly)
     apiHourly = ``;
 }
-function searchLocationAPI(){
-
+function loadWindow(){
+    let apiNow;
+    let apiHourly;
+    findLocation();
+    apiNow = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=c0eb657b1620478cc82c72581f8128ba`;
+    apiHourly = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely&appid=c0eb657b1620478cc82c72581f8128ba`;
+    loadNow(apiNow);
+    loadHourly(apiHourly)
+    apiHourly = ``;
 }
 
-window.addEventListener('load', loadAPI);
+window.addEventListener('load', loadWindow);
 document.querySelector('#clickDiv').addEventListener('click', function(){
     while(Hourly.hasChildNodes()){
         Hourly.removeChild(Hourly.firstChild);
     }
     hourlyTempforGraph = [];
     hourforGraph = [];
-    // writeHourly();
+    writeHourly();
 })
 document.querySelector('#clickDiv').addEventListener('click', loadAPI)
