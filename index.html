@@ -5,21 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 </head>
 <body>
-    <div>
-        <input type = 'text' class ='locationInput' value = 'Suwon'/>
-        <h1 class = 'location'></h1>
-        <p id ='country'></p>
-        <div class="temperature">
-            <div id = 'icon'>
-                <img id="wicon" src="" alt="Weather icon">
+    <div id='total'>
+
+        <div id='inputBox'>
+            <div class="inlineBlock">
+                <input type = 'text' id ='locationInput' placeholder="여기에 위치를 입력 하시오"/>
             </div>
-            <h2 class="degree"></h2>
-            <div class="temperature-description"></div>
+            <div id='clickDiv' class='inlineBlock'>
+                <button id = 'currentPosition' class='searchBtn'>
+                    <i class="fa fa-map-marker"></i>
+                </button>
+                <button id = 'search' class = 'searchBtn'>
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+        <div id='locationDiv' class='informationDiv'>
+            <div id='cityCountry' class='inlineBlock'>
+                <div id='location' class='textAlignCenter inlineBlock'></div>
+                <div id ='country' class='inlineBlock'></div>
+            </div>
+            <button id='mapButton'><i class="fa fa-map" style="font-size:32px"></i></button>
+        </div>
+        <div id = 'information' class='informationDiv'>
+            <div class="temperature">
+                <div id = 'icon' class='inlineBlock'>
+                    <img id="wicon" src="" alt="Weather icon">
+                    <div id='icon-description'></div>
+                </div>
+                <div id='currentInformation' class='inlineBlock'>
+                    <div id="degree"></div>
+                    <div id="feelLike"></div>
+                    <div id="tempMax"></div>
+                    <div id="tempMin"></div>
+                </div>
+                <div class="temperature-description"></div>
+            </div>
+        </div>
+        <div id="hourlyGraph" class="informationDiv">
+            <canvas id="temperatureGraph" height="100"></canvas>
+        </div>
+        <div class='informationDiv'>
+            <div id='hourly'></div>
+            시간 별 날씨는 위치 검색에서만 제공됩니다.
         </div>
     </div>
+    <script type="text/javascript" src="./script/declaration.js"></script>
     <script type="text/javascript" src="./script/app.js"></script>
-    <script type="text/javascript" src="./script/weatherAPI.js"></script>
+    <script type="text/javascript" src="./script/graph.js"></script>
 </body>
 </html>

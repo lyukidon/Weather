@@ -1,27 +1,54 @@
 .inlineBlock{
     display: inline-block;
 }
+.textAlignCenter{
+    text-align: center;
+}
+.hourlyTemperatureClass{
+    width:41px;
+    text-align: center;
+    font-weight: 600;
+    padding:1px;
+    border:1px solid black;
+    border-radius: 10px;
+    margin-left: 4px;
+}
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 body{
     height: 100vh;
-    display: flex;
+    /* display: flex;
     justify-content: center;
     flex-direction: column;
-    align-items: center;
-    background:grey;
+    align-items: center; */
+    /* background: linear-gradient(to bottom,white, rgb(0, 81, 255)); */
+    background-color: rgb(34, 34, 34);
+}
+#total{
+    margin: 0 auto;
+    padding-top: 100px;
+    width: 335px;
+}
+#location{
+    font-weight: 750;
+    font-size: 35px;
+}
+#country{
+    margin-left: 5px;
+    vertical-align: bottom;
+}
+#mapButton{
+    margin-left: 30px;
+    cursor: pointer;
+    background-color: rgb(87, 87, 87);
+    color: white;
+    border: none;
 }
 .temperature{
-    height: 30vh;
-    width: 50%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: column;
+
 }
 .degree-section{
     display: flex;
@@ -30,4 +57,52 @@ body{
 }
 .degree-section h2{
     font-size: 40px;
+}
+input::placeholder {
+    color: black;
+}
+#locationInput{
+    text-align: center;
+    color: black;
+    border: none;
+    font-size: 16px;
+    width: 250px;
+    height: 35px;
+    border-radius: 10px;
+}
+.searchBtn, .currentPosition{
+    color: black;
+    font-weight: 600;
+}
+.searchBtn{
+    background-color: white;
+    width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 10px;
+}
+#currentPosition{
+    margin-left: 3px;
+}
+.informationDiv{
+    margin-top: 12px;
+    padding: 7px;
+    background-color: rgb(87, 87, 87);
+    color: white;
+    border-radius: 10px;
+}
+#cityCountry{
+    width: 240px;
+}
+#icon{
+    width: 50%;
+}
+#currentInformation{
+    margin-left: 22%;
+}
+#tempMax{
+    color: rgb(255, 95, 95);
+}
+#tempMin{
+    color: skyblue;
 }
