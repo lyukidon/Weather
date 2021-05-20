@@ -41,7 +41,7 @@ function writeElement(dataNow){
 async function loadHourly(apiHourly){
     const responseHourly = await fetch(apiHourly)
     const dataHourly = await responseHourly.json();
-    console.log(dataHourly);
+    // console.log(dataHourly);
     currentHour(dataHourly);
 }
 
