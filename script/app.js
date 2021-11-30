@@ -129,11 +129,11 @@ function loadAPI(e){
     let apiNow;
     let apiHourly;
     if (e.target.id === 'search'){
-        apiNow = `https://api.openweathermap.org/data/2.5/weather?q=${locationInput}&appid=c0eb657b1620478cc82c72581f8128ba`;
+        apiNow = `https://api.openweathermap.org/data/2.5/weather?q=${locationInput}&appid=`;
     }else if(e.target.id==='currentPosition' || e.target.className === 'fa fa-map'){
         findLocation();
-        apiNow = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=c0eb657b1620478cc82c72581f8128ba`;
-        apiHourly = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely&appid=c0eb657b1620478cc82c72581f8128ba`;
+        apiNow = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=`;
+        apiHourly = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely&appid=`;
     }
     loadNow(apiNow);
     loadHourly(apiHourly)
@@ -143,8 +143,8 @@ function loadWindow(){
     let apiNow;
     let apiHourly;
     findLocation();
-    apiNow = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=c0eb657b1620478cc82c72581f8128ba`;
-    apiHourly = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely&appid=c0eb657b1620478cc82c72581f8128ba`;
+    apiNow = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=`;
+    apiHourly = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely&appid=`;
     loadNow(apiNow);
     loadHourly(apiHourly)
     apiHourly = ``;
